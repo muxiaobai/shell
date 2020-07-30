@@ -1,0 +1,13 @@
+#第一步：写cron脚本文件,命名为crontest.cron。
+#15,30,45,59 * * * * echo "xgmtest....." >> xgmtest.txt  表示，每隔15分钟，执行打印一次命令 
+#第二步：添加定时任务。执行命令 “crontab crontest.cron”。搞定 
+#第三步："crontab -l" 查看定时任务是否成功或者检测/var/spool/cron下是否生成对应cron脚本
+
+
+
+# 每天早上八点
+0 6 * * * echo "Good morning." >> /tmp/test.txt
+
+# 每天晚上23点执行命令
+
+0 23 * * *  /root/upgrade.sh
