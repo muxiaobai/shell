@@ -9,3 +9,11 @@
 
 ## docker 版本
 docker/docker_upgrade.sh
+
+
+## common 常用脚本
+
+- 30天日志自动清理
+- 把class修改到jar中
+- 导入pgsql数据库
+- netstat 判断端口监听，服务是否启动。
