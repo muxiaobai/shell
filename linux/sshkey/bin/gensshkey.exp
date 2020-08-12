@@ -1,0 +1,9 @@
+#!/usr/bin/expect -d 
+spawn ssh-keygen
+expect {
+".ssh/id_rsa" {send "\r";exp_continue}
+"Overwrite (y/n)?" exit    #判断是否已经有密钥文件，有则退出，没有就进行添加。
+"Enter passphrase" {send "\r";exp_continue}
+"Enter same passphrase again:" {send "\r"}
+}
+expect eof

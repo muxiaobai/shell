@@ -1,0 +1,28 @@
+#!/usr/bin/expect
+
+if {$argc<2} {  
+send_user "Usage: $argv0 ip pwd  ...\n  and default port 22. username: root. \n"  
+exit  
+} 
+set timeout 30
+set host [lindex $argv 0]  
+set password [lindex $argv 1]
+set shell [lindex $argv 2]
+#set host "192.168.160.71"
+set port "22"
+set username "root"
+#set password "123456"
+
+spawn ssh -p ${port} $username@$host
+expect {
+"*yes/no" {send "yes\r";exp_continue}
+"*password:" {send "$password\r"}
+}
+expect "]#"
+send "chmod +x ${shell} \r"
+#interact
+expect "]#"
+send "${shell}\r"
+expect "]#"
+send "exit\r"
+expect eof {exit 0 ;} 

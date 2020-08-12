@@ -1,0 +1,13 @@
+#!/usr/bin/expect -d
+
+#调试的时候可以加个-d参数，便于查看我们的哪里步骤出现了错误。
+
+set timeout 30
+set ip [lindex $argv 0 ]
+set pwd [lindex $argv 1 ]
+spawn cat ~/.ssh/id_*.pub | ssh  root@${ip} 'cat >> .ssh/authorized_keys'
+expect {
+    "yes/no" {send "yes\r";exp_continue}
+    "password:" {send "${pwd}\r"}
+}
+expect eof
