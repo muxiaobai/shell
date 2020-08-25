@@ -19,9 +19,9 @@ fi
 
 elasticsearchip=$1
 elasticsearchName="elasticsearch-7.5.0"
-apppath=/opt/openlab/elasticsearch
+apppath=/opt/demo/elasticsearch
 if [ -d "$apppath" ]; then
-    #tar -czvf  /opt/openlab/elasticsearch_`date \"+%Y%m%d%H%M%S\"`.tar.gz -C /opt/openlab elasticsearch/
+    #tar -czvf  /opt/demo/elasticsearch_`date \"+%Y%m%d%H%M%S\"`.tar.gz -C /opt/demo elasticsearch/
     rm -rf $apppath
 fi
 mkdir -p $apppath

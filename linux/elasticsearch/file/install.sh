@@ -9,14 +9,14 @@ fi
 if [ ! -n "$1" ];then
     echo "This Shell script execution needs to specify a parameter, The parameter is local IP address."
     echo "Usage: "
-    echo -ne "\t For example:  sh `basename $0` 192.168.1.100 /opt/openlab/elasticsearch master/slave master_ip all_ip "
+    echo -ne "\t For example:  sh `basename $0` 192.168.1.100 /opt/demo/elasticsearch master/slave master_ip all_ip "
     echo -ne "\n"
     exit 1
 fi
 if [ ! -n "$2" ];then
     echo "This Shell script execution needs to specify a parameter, The parameter is remote elasticsearch path."
     echo "Usage: "
-    echo -ne "\t For example:  sh `basename $0` 192.168.1.100 /opt/openlab/elasticsearch master/slave master_ip all_ip"
+    echo -ne "\t For example:  sh `basename $0` 192.168.1.100 /opt/demo/elasticsearch master/slave master_ip all_ip"
     echo -ne "\n"
     exit 1
 fi
@@ -33,7 +33,7 @@ master_ip=$4
 all_ip=$5
 service_url=$6
 #if [ -d "$apppath" ]; then
-    #tar -czvf  /opt/openlab/elasticsearch_`date \"+%Y%m%d%H%M%S\"`.tar.gz -C /opt/openlab elasticsearch/
+    #tar -czvf  /opt/demo/elasticsearch_`date \"+%Y%m%d%H%M%S\"`.tar.gz -C /opt/demo elasticsearch/
 #    rm -rf $apppath
 #fi
 echo -e "\033[1;32;40m install `basename $0` $1 $2  \033[0m "

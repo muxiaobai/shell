@@ -10,7 +10,8 @@
 - netstat 判断端口监听，服务是否启动。
 
 #### elasticsearch 集群
-install.sh
+
+- install.sh
 
 #### tomcat_upgrade_rollback 升级jar或者回退
 - 原始版本rollback.sh  upgrade.sh

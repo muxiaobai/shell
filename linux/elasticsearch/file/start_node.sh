@@ -11,9 +11,9 @@
 #$1/elasticsearch-7.5.0-master/bin/elasticsearch -d
 #$1/elasticsearch-7.5.0-slave1/bin/elasticsearch -d
 #$1/elasticsearch-7.5.0-slave2/bin/elasticsearch -d
-#/opt/webber/elasticsearch/elasticsearch-7.5.0-slave2/bin/elasticsearch -d
-#/opt/webber/elasticsearch/elasticsearch-7.5.0-slave1/bin/elasticsearch -d
-#/opt/webber/elasticsearch/elasticsearch-7.5.0-slave2/bin/elasticsearch -d
+#/opt/elasticsearch/elasticsearch-7.5.0-slave2/bin/elasticsearch -d
+#/opt/elasticsearch/elasticsearch-7.5.0-slave1/bin/elasticsearch -d
+#/opt/elasticsearch/elasticsearch-7.5.0-slave2/bin/elasticsearch -d
 #su - elasticsearch  nohup /$apppath/elasticsearch-7.5.0-master/bin/elasticsearch -d &  
 #su - elasticsearch  nohup /$apppath/elasticsearch-7.5.0-slave1/bin/elasticsearch -d &  
 #su - elasticsearch  nohup /$apppath/elasticsearch-7.5.0-slave2/bin/elasticsearch -d &  
