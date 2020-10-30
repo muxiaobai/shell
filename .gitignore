@@ -41,7 +41,6 @@ local.properties
 *.classpath
 *.log
 *.gz
-*.bat
 
 ######################
 # Visual Studio Code
