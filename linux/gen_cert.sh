@@ -4,7 +4,7 @@ passwd=123456
 name=zhang
 temppath=`pwd`
 cn='www.baidu.com'
-jdk_bin=/opt/webber/jar/jdk1.8.0_201/bin
+jdk_bin=/opt/jar/jdk1.8.0_201/bin
 keytool -help
 if [ $? -eq 0 ];then
     jdk_bin=`which keytool`	
