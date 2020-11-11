@@ -1,22 +1,23 @@
 #!/bin/bash
 #需要替换的包名称
-bmc=$1
+jar=$1
 #需要替换的文件名称
-hhwjmc=$2
+file=$2
+jdk=/opt/jdk/bin
 #找到替换文件路径
-thwjlj=`jar -tvf \$bmc|grep \$hhwjmc|awk '{print \$NF}'`
-
-echo $bmc
-echo $hhwjmc
-echo $thwjlj
+jarpath=`\$jdk/jar -tvf \$bmc|grep \$file|awk '{print \$NF}'`
+# 多个重名的文件，会出错
+echo $jar
+echo $file
+echo $jarpath
 #把要替换的文件解压出来
-jar -xvf $bmc $thwjlj
+$jdk/jar -xvf $jar $jarpath
 #删掉原文件
-rm -f $thwjlj
+rm -rf $jarpath
 #换掉文件
-cp thwj/$hhwjmc $thwjlj
+cp  $file $jarpath
 #重新将文件加入到jar包中
-jar -uvf $bmc $thwjlj
+$jdk/jar -uvf $jar $jarpath
 echo '替换完成'
 #删除解压文件
-rm -rf $thwjlj
+rm -rf $jarpath
