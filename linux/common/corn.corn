@@ -5,17 +5,23 @@
 #第二步：添加定时任务。执行命令 “crontab crontest.cron”。搞定 
 #第三步："crontab -l" 查看定时任务是否成功或者检测/var/spool/cron下是否生成对应cron脚本
 
-
-
 # 每天早上八点
-0 6 * * * echo "Good morning." >> /tmp/test.txt
+0 8 * * * echo "Good morning." >> /tmp/test.txt
 
 # 每天晚上23点执行命令
-
 0 23 * * *  /root/upgrade.sh
 
 
-
 #crontab -e
-#将auto-del-30-days-ago-log.sh执行脚本加入到系统计划任务，到点自动执行 凌晨0点20分
+#将auto-del-30-days-ago-log.sh执行脚本加入到系统计划任务，到点自动执行 凌晨0点10分
 #10 0 * * * /opt/soft/log/auto-del-7-days-ago-log.sh >/dev/null 2>&1
+
+分   时   天   月   星期
+0-59 0-23 1-31 1-12 0-6这里的0或7代表星期日
+
+星号（*）：代表每的意思，例如month字段如果是星号，则表示每月都执行该命令操作。
+逗号（,）：表示分隔时段的意思，例如，“1,3,5,7,9”。
+中杠（-）：表示一个时间范围，例如“2-6”表示“2,3,4,5,6”。
+正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。
+
+*/5 * * * * /home/test.sh 在每5分钟执行一次test.sh脚本。
