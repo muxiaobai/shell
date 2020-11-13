@@ -83,8 +83,23 @@ POST test/_analyze
 #修改密码
 
 # 查询
-curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://192.168.31.40:19200/article_data/_search
+curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/article_data/_search
 
 # 删除
-curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XDELETE http://192.168.31.40:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
+curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XDELETE http://127.0.0.1:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
 
+#head
+http://192.168.160.23:9100/?auth_user=elastic&auth_password=elasticsearch_2017@*))
+
+
+192.168.160.23 - - [13/May/2020:15:09:59 +0800] "GET /openlab_web/openapp/system/captcha/generate HTTP/1.1" 200 2273 "http://192.168.120.83:8083/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0"
+192.168.160.23 - - [13/May/2020:15:09:59 +0800] "GET /openlab_web/openapp/system/captcha/generate HTTP/1.1" 200 2273 "http://192.168.120.83:8083/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0"
+
+
+
+URI1 (%{URIPROTO}://)?(?:%{USER}(?::[^@]*)?@)?(?:%{URIHOST})?(?:%{URIPATHPARAM})?
+NGINXACCESS4 %{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] \"%{WORD:request_method} %{NOTSPACE:request_url} HTTP/%{NUMBER:httpversion}\" %{NUMBER:status:int} %{NUMBER:body_size:int} \"(?:%{URI1:http_referrer}|-)\" \"${GREEDYDATA:agent}\" \"(%{WORD:x_forword_for}|-)\"
+
+%{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] \"%{WORD:request_method} %{NOTSPACE:request_url} HTTP/%{NUMBER:httpversion}\" %{NUMBER:status:int} %{NUMBER:body_size:int} \"(?:%{URI1:http_referrer}|-)\" (%{QS:agent})
+
+%{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] \"%{WORD:request_method} %{NOTSPACE:request_url} HTTP/%{NUMBER:httpversion}\" %{NUMBER:status:int} %{NUMBER:body_size:int} \"%{QS:referrer}\" \"%{QS:agent}\"
