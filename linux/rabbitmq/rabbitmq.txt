@@ -1,0 +1,85 @@
+使用命令行初始化RabbitMQ队列：
+
+   1、切换到rabbitmq的安装目录下
+
+	cd ${rabbitHome}/sbin/
+
+   2、获取rabbitmqctl自带的工具
+
+	wget http://127.0.0.1:15672/cli/rabbitmqadmin
+
+   3、赋权
+
+	chmod 777 rabbitmqadmin
+
+   4、新建用户及赋值权限（若安装时已完成用户的新建，则跳过此步操作）
+
+	rabbitmqctl add_user openlab_rabbit RabbitMQ_2017@Lab
+	rabbitmqctl set_user_tags openlab_rabbit administrator
+	rabbitmq-plugins enable rabbitmq_management
+	rabbitmqctl set_permissions -p "/" openlab_rabbit ".*" ".*" ".*"
+
+   5、新建交换机
+
+	./rabbitmqadmin declare exchange --vhost=/ name=appLogsExchanges durable=true auto_delete=false type=topic
+
+   6、新建队列
+
+	./rabbitmqadmin declare queue --vhost=/ name=AppSysLogs durable=true  auto_delete=false
+
+   7、绑定交换机与队列
+
+	./rabbitmqadmin declare binding --vhost=/ source=appLogsExchanges destination=AppSysLogs routing_key=AppSysLogs
+
+   8、查看交换机，队列，绑定关系
+	查看队列
+		rabbitmqctl list_queues
+	查看交换机
+		rabbitmqctl list_exchanges
+	查看绑定关系
+		rabbitmqctl list_bindings
+
+---------------------------------------------------------------
+
+./rabbitmqadmin delete queue name=AppSysLogs
+./rabbitmqadmin delete exchange name=appLogsExchanges
+
+
+---------------------------------------------------------------
+rabbit_mq 接口相关
+
+---------------------------------------------------------------
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPUT -d'{"vhost":"/","name":"111","type":"topic","durable":"true","auto_delete":"false","internal":"false","arguments":{}}'       http://127.0.0.1:15672/api/exchanges/%2F/appLogsExchanges
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPUT -d'{"vhost":"/","name":"222","durable":"true","auto_delete":"false","arguments":{}}' http://127.0.0.1:15672/api/queues/%2F/AppSysLogs
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPOST -d'{"vhost":"/","source":"111","destination_type":"q","destination":"22","routing_key":"","arguments":{}}' http://127.0.0.1:15672/api/bindings/%2F/e/appLogsExchanges/q/AppSysLogs
+
+---------------------------------------------------------------
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -XGET http://127.0.0.1:15672/api/exchanges
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -XGET http://127.0.0.1:15672/api/queues
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -XGET http://127.0.0.1:15672/api/exchanges/%2F/appLogsExchanges/bindings/source
+
+---------------------------------------------------------------
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XDELETE http://127.0.0.1:15672/api/exchanges/%2F/appLogsExchanges
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XDELETE http://127.0.0.1:15672/api/queues/%2F/app_search_news_queue
+
+---------------------------------------------------------------
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPUT -d'{"vhost":"/","name":"111","type":"topic","durable":"true","auto_delete":"false","internal":"false","arguments":{}}'       http://127.0.0.1:15672/api/exchanges/%2F/app_search_news_index_exchange
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPUT -d'{"vhost":"/","name":"22","durable":"true","auto_delete":"false","arguments":{}}' http://127.0.0.1:15672/api/queues/%2F/app_search_news_queue
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPUT -d'{"vhost":"/","name":"22","durable":"true","auto_delete":"false","arguments":{x-message-ttl:60000}}' http://127.0.0.1:15672/api/queues/%2F/AppSysLogs
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPOST -d'{"vhost":"/","source":"111","destination_type":"q","destination":"22","routing_key":"","arguments":{}}' http://127.0.0.1:15672/api/bindings/%2F/e/app_search_news_index_exchange/q/app_search_news_queue
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -XGET http://127.0.0.1:15672/api/exchanges/%2F/app_search_news_index_exchange/bindings/source
+
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XPUT -d'{"vhost":"/","name":"AppSysLogs","durable":"true","auto_delete":"false","arguments":{"x-message-ttl":60000}}' http://127.0.0.1:15672/api/queues/%2F/AppSysLogs
+
