@@ -23,9 +23,12 @@ echo '替换完成'
 #删除解压文件
 rm -rf $filepath
 
+
 # 编译java  需要制定引用的jar或者classpath
-# Spring Boot  重命名 可以unzip jar  然后在当前目录编译 需要制定路径
+# Spring Boot  重命名 可以unzip jar
+# 解压 $jdk/jar -xvf $jar $filepath/$file
+# 然后在当前目录编译 需要制定路径
 # $jdk/javac -encoding utf-8 -cp ./BOOT-INF/classes:./BOOT-INF/lib/* -d ./BOOT-INF/classes/  xxx.java
-# 打包到jar  $jdk/jar -uvf $jar ./BOOT-INF/classes/$filepath
-#$jdk/javac -classpath  .:/opt/xxx.jar -d  .  xxx.java
-##
+# 打包到jar  $jdk/jar -uvf $jar ./BOOT-INF/classes/$filepath/$file
+# $jdk/javac -classpath  .:/opt/xxx.jar -d  .  xxx.java
+#

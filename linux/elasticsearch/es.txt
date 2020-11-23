@@ -21,31 +21,6 @@ Kibana
 Run bin/kibana (or bin\kibana.bat on Windows)
 http://localhost:5601
 
-#接口指令
-
-GET /_cat/health?v
-
-GET /_nodes/process
-
-GET /liuwunan
-DELETE /liuwunan
-
-POST /liuwunan/_search
-
-
-
-
-POST history_query/_search
-
-DELETE history_query/_doc/1C4Il3IB621CgvbDt5UE
-
-GET history_query/_mapping
-
-GET /_stats/fielddata?fields=*
-
-GET /_nodes/stats/indices/fielddata
-
-
 
 
 POST /liuwunan_test/_bulk
@@ -79,11 +54,38 @@ POST test/_analyze
   "analyzer": "my_hanlp_analyzer"
 }
 
+#接口指令
+
+GET /_cat/health?v
+
+GET /_nodes/process
+
+GET /liuwunan
+DELETE /liuwunan
+
+POST /liuwunan/_search
+
+
+
+
+POST history_query/_search
+
+DELETE history_query/_doc/1C4Il3IB621CgvbDt5UE
+
+GET history_query/_mapping
+
+GET /_stats/fielddata?fields=*
+
+GET /_nodes/stats/indices/fielddata
+
+
 
 #修改密码
 
 # 查询
 curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/article_data/_search
+
+curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/article_data/_mapping >> xx.json
 
 # 删除
 curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XDELETE http://127.0.0.1:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
