@@ -1,0 +1,8 @@
+
+clickhouse-client
+
+show databases;
+
+use xxxx;
+
+show tables;
