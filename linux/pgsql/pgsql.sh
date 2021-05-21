@@ -21,9 +21,20 @@ su - vsb_pgsql -c "export PGPASSWORD='pgsql'; /opt/pgsql/bin/pg_dump -h 127.0.0.
 ./dropdb -h 127.0.0.1 -p 15432 -U pgsql apptest
 
 # 进入 ./psql
+# list 素有的数据库
 \l    # list all database
 # 切换数据库
 \c dbName; # change db;
- \q # quit
+
+\q # quit
 # select tables owner db;
 select * from pg_tables where tablename not like '%pg_%';
+
+# psql 命令行帮助
+\?
+# sql 帮助
+\h
+# 该库的所有表
+\d
+# 该表的结构 detail
+\d 表名[视图名]
