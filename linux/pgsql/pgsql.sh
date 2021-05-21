@@ -11,8 +11,10 @@ export PGPASSWORD='pgsql';  /opt/demo/pgsql/bin/dropdb -h 127.0.0.1 -p 15432 -U 
 su - vsb_pgsql -c "export PGPASSWORD='pgsql'; /opt/pgsql/bin/pg_dump -h 127.0.0.1 -p 15432 -U pgsql --inserts -f /opt/apptest.sql apptest"
 #  create apptest
 ./createdb -h 127.0.0.1 -p 15432 -U pgsql apptest;
+
 # import public.sql to apptest use pgsql
 ./psql -h 127.0.0.1 -p 15432 -d apptest -U pgsql -f  public.sql
+
 # dump db apptest to apptest.sql
 ./pg_dump -h 127.0.0.1 -p 15432 -U pgsql --inserts -f apptest.sql apptest
 #  delete apptest
@@ -20,6 +22,7 @@ su - vsb_pgsql -c "export PGPASSWORD='pgsql'; /opt/pgsql/bin/pg_dump -h 127.0.0.
 
 # 进入 ./psql
 \l    # list all database
+# 切换数据库
 \c dbName; # change db;
  \q # quit
 # select tables owner db;
