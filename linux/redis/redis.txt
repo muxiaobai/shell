@@ -1,0 +1,13 @@
+
+进入
+redis-cli -a [pwd]
+
+//扫描
+keys *
+
+keys "aaa-*"
+// 删除
+del [key]
+
+//set
+
