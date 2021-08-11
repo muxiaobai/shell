@@ -270,7 +270,50 @@ GET data/_search
 }
 
 
+## 说明
 
+{
+  "query": {
+    "term": {
+      "field": {
+        "value": "value"
+      }
+    }
+  }
+}
+
+
+创建一个es.json
+
+{
+  "query": {
+     "bool": {
+    "must": [
+        {
+          "term": {
+            "id": "1"
+          }
+        },
+        {
+          "term": {
+            "field": "1"
+          }
+        }
+      ]
+     }
+  },
+  "aggs": {
+    "mode": {
+      "terms": {
+        "field": "id"
+      }
+    }
+  }
+}
+
+
+
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://eshost:19200/index/_search
 
 
 #修改密码
@@ -279,6 +322,9 @@ GET data/_search
 curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/article_data/_search
 
 curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/article_data/_mapping >> xx.json
+
+# 系统菜单
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/_cat?v
 
 # 删除
 curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XDELETE http://127.0.0.1:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
@@ -309,5 +355,3 @@ NGINXACCESS4 %{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] 
 %{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] \"%{WORD:request_method} %{NOTSPACE:request_url} HTTP/%{NUMBER:httpversion}\" %{NUMBER:status:int} %{NUMBER:body_size:int} \"(?:%{URI1:http_referrer}|-)\" (%{QS:agent})
 
 %{IP:remote_addr} - (%{USERNAME:user}|-) \[%{HTTPDATE:timestamp}\] \"%{WORD:request_method} %{NOTSPACE:request_url} HTTP/%{NUMBER:httpversion}\" %{NUMBER:status:int} %{NUMBER:body_size:int} \"%{QS:referrer}\" \"%{QS:agent}\"
-
-#
