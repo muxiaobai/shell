@@ -13,8 +13,8 @@ elif [ "$key" = "JAVA_OPTIONS_SEARCH" ];then
     JAVA_OPTIONS_SEARCH=$value
 elif [ "$key" = "eurekaip" ];then
     eurekaip=$value
-elif [ "$key" = "vsburl" ];then
-    vsburl=$value
+elif [ "$key" = "otherurl" ];then
+    otherurl=$value
 elif [ "$key" = "datasourcesystem" ];then
     datasourcesystem=$value
 elif [ "$key" = "datasourcesearch" ];then
@@ -42,7 +42,7 @@ fi
 done < ${temppath}/config/conf.conf
 
 
-nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS_SEARCH}  -jar ${temppath}/jar/app-search-0.0.1.jar  ${eurekaip} ${vsburl} ${datasourcesearch} ${datasourceusername} ${datasourcepwd} ${rabbitmq} ${redis}  ${esconfigusername} ${esconfigpassword} ${esconfighosts}  > /dev/null  2>&1  &
+nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS_SEARCH}  -jar ${temppath}/jar/app-search-0.0.1.jar  ${eurekaip} ${otherurl} ${datasourcesearch} ${datasourceusername} ${datasourcepwd} ${rabbitmq} ${redis}  ${esconfigusername} ${esconfigpassword} ${esconfighosts}  > /dev/null  2>&1  &
 
 echo "----------------------------------------------------------------------------------------"
 check_search_start(){

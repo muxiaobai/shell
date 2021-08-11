@@ -2,7 +2,7 @@
 #!/bin/sh
 apppath=/opt/demo
 temppath=`pwd`
-chown -R vsb_pgsql:vsb_pgsql ${temppath}/
+chown -R user_pgsql:user_pgsql ${temppath}/
 if [ ! -n "$1" ];then
       echo "This Shell script execution needs to specify a parameter, The parameter is db Name."
       echo "Usage: "
@@ -21,7 +21,7 @@ fi
 # createdb pgsql -f import pg_dump dorpdb
 
 #export PGPASSWORD='pgsql'; /opt/demo/pgsql/bin/createdb  -h 127.0.0.1 -p 15432 -U pgsql apptest;
-#export PGPASSWORD='pgsql';  /opt/demo/pgsql/bin/psql -h 127.0.0.1 -p 15432 -d apptest -U pgsql -f  /home/vsb_pgsql/apptest.sql
+#export PGPASSWORD='pgsql';  /opt/demo/pgsql/bin/psql -h 127.0.0.1 -p 15432 -d apptest -U pgsql -f  /home/user_pgsql/apptest.sql
 #export PGPASSWORD='pgsql';  /opt/demo/pgsql/bin/psql -h 127.0.0.1 -p 15432 -d postgres -U pgsql -W 'pgsql'
 #export PGPASSWORD='pgsql';  /opt/demo/pgsql/bin/dropdb -h 127.0.0.1 -p 15432 -U pgsql apptest
 

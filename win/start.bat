@@ -21,7 +21,7 @@ start /d  "E:\tools\nginx-1.14.2\" nginx.exe  -c conf/nginx.conf
 exit
 
 echo pg_sql START
-"E:\Program Files\VSBEdu\pgsql\bin\pg_ctl.exe"  -D "E:\Program Files\VSBEdu\pgsql\data" start
+"E:\Program Files\xxx\pgsql\bin\pg_ctl.exe"  -D "E:\Program Files\xxx\pgsql\data" start
 
 echo idea START
 start /d "E:\Program Files\JetBrains\IntelliJ IDEA 2019.1.2\bin" idea64.exe

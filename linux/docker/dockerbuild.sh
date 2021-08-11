@@ -84,7 +84,7 @@ then
             echo "打Tag版本"
             docker tag ${serverID}  dockerhub.com/demo/${appId}:${appVersion}
             echo ""
-            echo "推送openapp.vsbclub.com/openapp/${appId}:${appVersion}镜像"
+            echo "推送dockerhub.com/demo/${appId}:${appVersion}镜像"
             docker push dockerhub.com/demo/${appId}:${appVersion}
             echo ""
 	    echo ""

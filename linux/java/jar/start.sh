@@ -13,8 +13,8 @@ elif [ "$key" = "JAVA_OPTIONS_DEMO" ];then
     JAVA_OPTIONS_DEMO=$value
 elif [ "$key" = "eurekaip" ];then
     eurekaip=$value
-elif [ "$key" = "vsburl" ];then
-    vsburl=$value
+elif [ "$key" = "otherurl" ];then
+    otherurl=$value
 elif [ "$key" = "datasourcesystem" ];then
     datasourcesystem=$value
 elif [ "$key" = "datasourcedemo" ];then
@@ -75,13 +75,13 @@ else
     echo "app-register service start success"
 fi
 
-#nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-gateway-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd}  ${vsburl}  > ${temppath}/logs/app-gateway.log  2>&1  &
-#nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-auth-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd} ${redis} ${rabbitmq}  ${vsburl}  > ${temppath}/logs/app-auth.log  2>&1 &
-#nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-system-0.0.1.jar ${eurekaip} ${datasourcesystem} ${datasourceusername} ${datasourcepwd}   ${redis} ${rabbitmq} ${vsburl}  > ${temppath}/logs/app-system.log  2>&1  &
+#nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-gateway-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd}  ${otherurl}  > ${temppath}/logs/app-gateway.log  2>&1  &
+#nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-auth-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd} ${redis} ${rabbitmq}  ${otherurl}  > ${temppath}/logs/app-auth.log  2>&1 &
+#nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-system-0.0.1.jar ${eurekaip} ${datasourcesystem} ${datasourceusername} ${datasourcepwd}   ${redis} ${rabbitmq} ${otherurl}  > ${temppath}/logs/app-system.log  2>&1  &
 
-nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-gateway-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd}  ${vsburl}  > /dev/null  2>&1  &
-nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-auth-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd} ${redis} ${rabbitmq}  ${vsburl}  > /dev/null  2>&1 &
-nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-system-0.0.1.jar ${eurekaip} ${datasourcesystem} ${datasourceusername} ${datasourcepwd}   ${redis} ${rabbitmq} ${vsburl}  > /dev/null  2>&1  &
+nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-gateway-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd}  ${otherurl}  > /dev/null  2>&1  &
+nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-auth-0.0.1.jar ${eurekaip} ${datasourcesystem}  ${datasourceusername} ${datasourcepwd} ${redis} ${rabbitmq}  ${otherurl}  > /dev/null  2>&1 &
+nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS} -jar ${temppath}/jar/app-system-0.0.1.jar ${eurekaip} ${datasourcesystem} ${datasourceusername} ${datasourcepwd}   ${redis} ${rabbitmq} ${otherurl}  > /dev/null  2>&1  &
 
 
 echo "----------------------------------------------------------------------------------------"
@@ -117,7 +117,7 @@ else
     echo "base service start success"
 fi
 
-nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS_DEMO}  -jar ${temppath}/jar/app-demo-0.0.1.jar  ${eurekaip} ${vsburl} ${datasourcedemo} ${datasourceusername} ${datasourcepwd} ${rabbitmq} ${redis}  ${esconfigusername} ${esconfigpassword} ${esconfighosts}  > /dev/null  2>&1  &
+nohup ${temppath}/${javapath}/java ${JAVA_OPTIONS_DEMO}  -jar ${temppath}/jar/app-demo-0.0.1.jar  ${eurekaip} ${otherurl} ${datasourcedemo} ${datasourceusername} ${datasourcepwd} ${rabbitmq} ${redis}  ${esconfigusername} ${esconfigpassword} ${esconfighosts}  > /dev/null  2>&1  &
 
 echo "----------------------------------------------------------------------------------------"
 check_search_start(){

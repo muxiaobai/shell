@@ -22,6 +22,10 @@ docker logs -f -t  --tail=100 mmmysql
 # 容器信息
 docker inspect mmmysql
 
+# 导出镜像到.tar压缩包
+docker save -o /home/user/images/ubuntu_14.04.tar ubuntu:14.04
+# 加载镜像到本地
+docker load --input ubuntu_14.04.tar
 
 # delete container
 docker rm -f app-test-0.0.1
