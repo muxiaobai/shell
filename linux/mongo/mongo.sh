@@ -3,7 +3,7 @@
 
 use apptest;
 #添加账号
-db.createUser({user:"test_mongo",pwd:"MongoDB_2017",roles:[{role:"readWrite",db:"apptest"}],mechanisms : ["SCRAM-SHA-1"]})
+db.createUser({user:"test_mongo",pwd:"MongoDB_pwd",roles:[{role:"readWrite",db:"apptest"}],mechanisms : ["SCRAM-SHA-1"]})
 #启动
 ./mongod -f mongo-master.conf
 

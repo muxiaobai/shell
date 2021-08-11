@@ -21,8 +21,8 @@ status_ip=$(echo `awk -F":" '/master/{print $1}' ${IP_file}` | awk -F " " '{prin
 status_port=$(echo `awk -F":" '/master/{print $2}' ${IP_file}` | awk -F " " '{print $1}')
 
 
-#echo "curl -u \"elastic:elasticsearch_2017@*))\" http://${status_ip}:19200/_cat/health?v"
-resp=`curl -u "elastic:elasticsearch_2017@*))" http://${status_ip}:19200/_cat/health?v`
+#echo "curl -u \"elastic:elasticsearch_pwd@*))\" http://${status_ip}:19200/_cat/health?v"
+resp=`curl -u "elastic:elasticsearch_pwd@*))" http://${status_ip}:19200/_cat/health?v`
 echo $resp
 green=`echo $resp| grep green`
 yellow=`echo $resp| grep yellow`

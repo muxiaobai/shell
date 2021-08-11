@@ -276,31 +276,31 @@ GET data/_search
 #修改密码
 
 # 查询
-curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/article_data/_search
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/article_data/_search
 
-curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/article_data/_mapping >> xx.json
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/article_data/_mapping >> xx.json
 
 # 删除
-curl -u 'elastic:elasticsearch_2017@*))' -H 'Content-type:application/json' -XDELETE http://127.0.0.1:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XDELETE http://127.0.0.1:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
 
 
 # 线程池
-curl -u 'elastic:elasticsearch_2017@*))' 'http://127.0.0.1:19200/_cat/thread_pool?v&h=ip,id,node_name,name,active,queue,rejected,completed,size,queue_size' | egrep 'search|ip'
+curl -u 'elastic:elasticsearch_pwd@*))' 'http://127.0.0.1:19200/_cat/thread_pool?v&h=ip,id,node_name,name,active,queue,rejected,completed,size,queue_size' | egrep 'search|ip'
 
 # setting 设置
-curl -u 'elastic:elasticsearch_2017@*))' 'http://127.0.0.1:19200/_settings?preserve_existing=true' -XPUT   -H 'Content-type:application/json'  -d '{"index.max_result_window" : "10000000"}'
+curl -u 'elastic:elasticsearch_pwd@*))' 'http://127.0.0.1:19200/_settings?preserve_existing=true' -XPUT   -H 'Content-type:application/json'  -d '{"index.max_result_window" : "10000000"}'
 
 
 # head
 npm start
 访问
-http://192.168.160.23:9100/?auth_user=elastic&auth_password=elasticsearch_2017@*))
+http://192.168.160.23:9100/?auth_user=elastic&auth_password=elasticsearch_pwd@*))
 
 
 grok
 
-192.168.160.23 - - [13/May/2020:15:09:59 +0800] "GET /openlab_web/openapp/system/captcha/generate HTTP/1.1" 200 2273 "http://192.168.120.83:8083/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0"
-192.168.160.23 - - [13/May/2020:15:09:59 +0800] "GET /openlab_web/openapp/system/captcha/generate HTTP/1.1" 200 2273 "http://192.168.120.83:8083/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0"
+192.168.160.23 - - [13/May/2020:15:09:59 +0800] "GET /user_web/demo/system/captcha/generate HTTP/1.1" 200 2273 "http://192.168.120.83:8083/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0"
+192.168.160.23 - - [13/May/2020:15:09:59 +0800] "GET /user_web/demo/system/captcha/generate HTTP/1.1" 200 2273 "http://192.168.120.83:8083/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0"
 
 
 URI1 (%{URIPROTO}://)?(?:%{USER}(?::[^@]*)?@)?(?:%{URIHOST})?(?:%{URIPATHPARAM})?

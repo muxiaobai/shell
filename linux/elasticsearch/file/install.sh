@@ -220,11 +220,11 @@ cat >> ${apppath}/resetpwd.sh <<EOF
     echo "add user success"
     fi
     sleep 5
-    curl -H "Content-Type:application/json" -XPOST -u "my_admin:my_password" http://${elasticsearchip}:19200/_xpack/security/user/elastic/_password -d '{ "password" : "elasticsearch_2017@*))" }'
+    curl -H "Content-Type:application/json" -XPOST -u "my_admin:my_password" http://${elasticsearchip}:19200/_xpack/security/user/elastic/_password -d '{ "password" : "elasticsearch_pwd@*))" }'
     if [ \$? -eq 0 ];then
     echo "update elastic pwd"
     fi
-    curl -u "elastic:elasticsearch_2017@*))" http://${elasticsearchip}:19200/_cat/health?v
+    curl -u "elastic:elasticsearch_pwd@*))" http://${elasticsearchip}:19200/_cat/health?v
     echo \$?
     ${ES_HOME}/bin/elasticsearch-users userdel my_admin
     echo \$?

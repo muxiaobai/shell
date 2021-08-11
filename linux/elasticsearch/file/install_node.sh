@@ -207,31 +207,31 @@ install_elasticsearch(){
         echo "# reset pwd..." >>$apppath/resetpwd.sh
         echo "$master_ES_HOME/bin/elasticsearch-users useradd my_admin -p my_password -r superuser" >> $apppath/resetpwd.sh
         echo " echo $? " >> $apppath/resetpwd.sh
-        echo "curl -H \"Content-Type:application/json\" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ \"password\" : \"elasticsearch_2017@*))\" }'
+        echo "curl -H \"Content-Type:application/json\" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ \"password\" : \"elasticsearch_pwd@*))\" }'
        " >>  $apppath/resetpwd.sh
         echo " echo $? " >> $apppath/resetpwd.sh
-        echo "curl -u \"elastic:elasticsearch_2017@*))\" http://$elasticsearchip:19200/_cat/health?v" >> $apppath/resetpwd.sh
+        echo "curl -u \"elastic:elasticsearch_pwd@*))\" http://$elasticsearchip:19200/_cat/health?v" >> $apppath/resetpwd.sh
         echo " echo $? " >> $apppath/resetpwd.sh
         echo "$master_ES_HOME/bin/elasticsearch-users userdel my_admin" >>  $apppath/resetpwd.sh
         echo " echo $? " >> $apppath/resetpwd.sh
         chmod +x $apppath/resetpwd.sh
-        curl -H "Content-Type:application/json" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ "password" : "elasticsearch_2017@*))" }'
+        curl -H "Content-Type:application/json" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ "password" : "elasticsearch_pwd@*))" }'
         echo $?
-        curl -u "elastic:elasticsearch_2017@*))" http://$elasticsearchip:19200/_cat/health?v
+        curl -u "elastic:elasticsearch_pwd@*))" http://$elasticsearchip:19200/_cat/health?v
         echo $?
         $master_ES_HOME/bin/elasticsearch-users userdel my_admin
         echo $?
         #停止
         #ps -ef | grep elasticsearch.bootstrap | grep java | grep -v grep |awk '{print $2}' | xargs  kill
         echo " INFO:elasticsearch installed success.You can search, please have fun."
-        echo " INFO: set elastic : curl -H \"Content-Type:application/json\" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ \"password\" : \"elasticsearch_2017@*))\" }' "
-        echo " INFO: please run cmd get lastest status : curl -u \"elastic:elasticsearch_2017@*))\" http://$elasticsearchip:19200/_cat/health?v "
+        echo " INFO: set elastic : curl -H \"Content-Type:application/json\" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ \"password\" : \"elasticsearch_pwd@*))\" }' "
+        echo " INFO: please run cmd get lastest status : curl -u \"elastic:elasticsearch_pwd@*))\" http://$elasticsearchip:19200/_cat/health?v "
         echo " INFO: you can start/stop elasticsearch use shell : $apppath/shutdown.sh  $apppath/start.sh"
         echo " INFO: resetpwd elasticsearch : $apppath/resetpwd.sh"
     else
         echo " WARN: Installed OK.but there are some problems with the startup."
-        echo " WARN: set elastic : curl -H \"Content-Type:application/json\" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ \"password\" : \"elasticsearch_2017@*))\" }' "
-        echo " WARN: please run cmd get lastest status : curl -u \"elastic:elasticsearch_2017@*))\" http://$elasticsearchip:19200/_cat/health?v "
+        echo " WARN: set elastic : curl -H \"Content-Type:application/json\" -XPOST -u my_admin:my_password http://$elasticsearchip:19200/_xpack/security/user/elastic/_password -d '{ \"password\" : \"elasticsearch_pwd@*))\" }' "
+        echo " WARN: please run cmd get lastest status : curl -u \"elastic:elasticsearch_pwd@*))\" http://$elasticsearchip:19200/_cat/health?v "
         echo " WARN: if status is not green; run again..."
     fi
 }
