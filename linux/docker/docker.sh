@@ -36,3 +36,7 @@ docker rmi -f app-test-0.0.1
 docker logs -f -t --tail 300 app-test-0.0.1
 
 
+docker build -f Dockerfile  -t oracle-8u201-jdk  .
+docker tag oracle-8u201-jdk  oracle-8u201-jdk:0.0.1
+docker push  oracle-8u201-jdk:0.0.1
+
