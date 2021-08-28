@@ -7,7 +7,7 @@ cn='www.baidu.com'
 jdk_bin=/opt/jar/jdk1.8.0_201/bin
 keytool -help
 if [ $? -eq 0 ];then
-    jdk_bin=`which keytool`	
+    jdk_bin=`which keytool`
     echo -e "\033[1;32;40m INFO `basename $0` installed jdk  \033[0m" 
 else     
     ${jdk_bin}/keytool -help

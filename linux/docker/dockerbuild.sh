@@ -11,6 +11,14 @@ appId=$4
 appVersion=$5
 
 dockerfilepath=${packagepath}/dockerfile
+if [ -e  "$dockerfilepath" ];then
+    echo -e "\033[1;32;40mINFO: dockerfile is exist \033[0m"
+else
+    echo -e "\033[1;31;40mERROR: dockerfile is not exist \033[0m"
+    #exit 2
+    mkdir -r ${dockerfilepath}
+fi
+
 echo "开始部署构建${serverID}镜像"
 
 # dockerfile 文件

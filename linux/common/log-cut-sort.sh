@@ -6,7 +6,8 @@ cat /logs/log_info.log | grep xxx | cut -c 24- | uniq -c | sort -rn | head -n 20
 egrep "xxx|xxx" 或者匹配
 cut -c 24-  从第24列进行截取到最后一位  -c 按照字符 默认从1开始
 uniq -c 去重 生成    数量  数据 两列
-sort -rn 按照第一行进行排序
+sort -r 倒序 -n 按数字  -h k/b/m/g排序   -k 2/4 第几列
+sort -r 按照第一行进行排序
 
 head -n 20 输出前20行
 
