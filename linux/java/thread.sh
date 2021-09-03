@@ -41,12 +41,14 @@ echo "------------------是否有死锁线程信息--------------------" >>${pwd
 #${javapath}/bin/jstack  ${javapid} | grep -i –E deadlock  >>${pwdpath}/dump.log
 ${javapath}/bin/jstack  ${javapid} | grep -i -E 'BLOCKED' >>${pwdpath}/dump.log
 #dumpThread.log
-${javapath}/bin/jstack  ${javapid} >${pwdpath}/dumpThread.log
+${javapath}/bin/jstack  ${javapid} >>${pwdpath}/dumpThread.log
 
 else
     echo -e "\033[1;31;40m ERROR: jstack  is not exist \033[0m"
 fi
 
+${javapath}/bin/jinfo -flags ${javapid} >>${pwdpath}/dump.log
+${javapath}/bin/jinfo -sysprops ${javapid} >>${pwdpath}/dump.log
 
 echo "-----------------jstat gc 信息--------------------------" >>${pwdpath}/dump.log
 ${javapath}/bin/jstat -gc ${javapid} 250 4 >>${pwdpath}/dump.log
