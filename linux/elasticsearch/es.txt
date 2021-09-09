@@ -54,6 +54,43 @@ POST test/_analyze
   "analyzer": "my_hanlp_analyzer"
 }
 
+GET test/_doc/EV67uXsBPCbdqQQp9IV-/_termvectors
+{"fields":["title.hanLP","content.hanLP"],"offsets":true,"payloads":true,"positions":true,"term_statistics":true,"field_statistics":true}
+
+
+POST test/_analyze
+{
+  "field": "title.hanLP",
+  "text": "阿拉斯加州发生8"
+}
+POST test/_analyze
+{
+  "analyzer": "hanlp_standard_analyzer",
+  "text": "文明餐桌优秀志愿者"
+}
+
+# 性能相关
+
+GET _stats/fielddata?fields=*
+
+GET test/_stats
+POST test/_cache/clear
+
+POST _cache/clear
+
+GET _cluster/settings
+
+PUT _cluster/settings
+{
+    "persistent" : {
+        "indices.breaker.fielddata.limit": "60%" ,
+        "indices.breaker.request.limit": "40%",
+        "indices.breaker.total.limit": "70%"
+    }
+}
+
+
+
 #接口指令
 
 GET /_cat/health?v
