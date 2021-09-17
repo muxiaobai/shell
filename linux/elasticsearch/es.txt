@@ -5,6 +5,78 @@
 curl -u elastic:123123 http://192.168.120.83:9200/_cat/health?v
 
 
+
+# 系统菜单
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/_cat?v
+
+# 修改系统limit
+PUT _cluster/settings
+{
+    "persistent" : {
+        "indices.breaker.fielddata.limit": "60%" ,
+        "indices.breaker.request.limit": "40%",
+        "indices.breaker.total.limit": "70%"
+    }
+}
+修改 elasticsearch.yml 添加
+
+indices.breaker.fielddata.limit: 60%
+#indices.breaker.fielddata.limit: 60% # this should work, but is not
+#indices.fielddata.breaker.limit: 60% # this is deprecated
+indices.breaker.total.limit: 70%
+
+indices.breaker.request.limit: 50%
+indices.fielddata.cache.size:  60%
+
+https://www.cnblogs.com/Orgliny/p/5442519.html
+
+es配置
+
+# 清除缓存
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/cache/_clear
+
+GET _stats/fielddata?fields=*
+
+GET _nodes/stats?pretty
+
+GET article_data/_stats
+POST article_data/_cache/clear
+
+POST _cache/clear
+
+GET _nodes/hot_threads?type=wait&interval=1s
+
+79.78.4% (391.7ms out of 500ms) cpu usage by thread ‘elasticsearch[Data-(110.188)-1][search][T#38]‘
+[search] ——代表 search线程操作。
+78.4% —— 代表名为 search 的线程在完成统计时占据了所有CPU时间的78.4%。
+cpu usage ——指示我们正在使用 cpu 的类型，当前是线程 CPU的使用率。
+block usage —— 处于阻塞状态的线程的阻塞使用率。
+wait usage —— 处于等待状态的线程的等待使用率。
+注意：线程名称在这里非常重要，这是因为它，我们可以猜测 ElasticSearch 的哪些功能会导致问题。
+上面的示例，我们可以初步得出是 search 线程占据了大量的CPU。
+实战中，除了 search 还有其他的线程，列举如下：
+recovery_stream —— 用于恢复模块事件
+cache —— 用于缓存事件
+merge —— 用于段合并线程
+index ——用于数据索引（写入）线程 等等。
+
+GET _nodes/master/hot_threads?type=wait&interval=1s
+
+GET _cat/thread_pool?v
+
+POST history_query/_delete_by_query
+
+
+# 删除
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XDELETE http://127.0.0.1:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
+
+# 线程池
+curl -u 'elastic:elasticsearch_pwd@*))' 'http://127.0.0.1:19200/_cat/thread_pool?v&h=ip,id,node_name,name,active,queue,rejected,completed,size,queue_size' | egrep 'search|ip'
+
+# setting 设置
+curl -u 'elastic:elasticsearch_pwd@*))' 'http://127.0.0.1:19200/_settings?preserve_existing=true' -XPUT   -H 'Content-type:application/json'  -d '{"index.max_result_window" : "10000000"}'
+
+
 ELK
 
 ./filebeat -e -c filebeat.yml
@@ -21,7 +93,13 @@ Kibana
 Run bin/kibana (or bin\kibana.bat on Windows)
 http://localhost:5601
 
+# 查询
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/article_data/_search
 
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/article_data/_mapping >> xx.json
+
+# 查询
+curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://eshost:19200/index/_search
 
 POST /liuwunan_test/_bulk
 {"index":{"_index":"liuwunan_test","_id":"1"}}
@@ -53,7 +131,7 @@ POST test/_analyze
   "text": "美国,|=阿拉斯加州发生8.0级地震",
   "analyzer": "my_hanlp_analyzer"
 }
-
+# 分析
 GET test/_doc/EV67uXsBPCbdqQQp9IV-/_termvectors
 {"fields":["title.hanLP","content.hanLP"],"offsets":true,"payloads":true,"positions":true,"term_statistics":true,"field_statistics":true}
 
@@ -348,30 +426,6 @@ GET data/_search
   }
 }
 
-
-
-curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://eshost:19200/index/_search
-
-
-#修改密码
-
-# 查询
-curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XPOST -d '@es.json' http://127.0.0.1:19200/article_data/_search
-
-curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/article_data/_mapping >> xx.json
-
-# 系统菜单
-curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/_cat?v
-
-# 删除
-curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XDELETE http://127.0.0.1:19200/article_data/_doc/1C4Il3IB621CgvbDt5UE
-
-
-# 线程池
-curl -u 'elastic:elasticsearch_pwd@*))' 'http://127.0.0.1:19200/_cat/thread_pool?v&h=ip,id,node_name,name,active,queue,rejected,completed,size,queue_size' | egrep 'search|ip'
-
-# setting 设置
-curl -u 'elastic:elasticsearch_pwd@*))' 'http://127.0.0.1:19200/_settings?preserve_existing=true' -XPUT   -H 'Content-type:application/json'  -d '{"index.max_result_window" : "10000000"}'
 
 
 # head
