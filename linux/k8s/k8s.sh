@@ -17,8 +17,10 @@ kubectl -n ns  logs  -f svc-app-877df6545-j7dzd
 
 kubectl -n ns  logs --tail=200  -f svc-app-877df6545-j7dzd
 
-拷贝文件
+拷贝容器内文件到主机
 kubectl cp ns/svc-app-search-fb47d75bb-xz8pd:var/d/application.yml application.yaml
+
+拷贝主机文件到容器内
 kubectl cp application.yaml ns/svc-app-search-fb47d75bb-xz8pd:var/d/application.yml
 
 kubectl patch pv pvc-8477bd20-ffbe-4fa2-85b9-f864d7b3690c  -p '{"metadata":{"finalizers":null}}' --type=merge

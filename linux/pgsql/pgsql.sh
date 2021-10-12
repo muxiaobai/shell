@@ -9,19 +9,22 @@ export PGPASSWORD='pgsql';  /opt/demo/pgsql/bin/psql -h 127.0.0.1 -p 15432 -d po
 export PGPASSWORD='pgsql';  /opt/demo/pgsql/bin/dropdb -h 127.0.0.1 -p 15432 -U pgsql apptest
 # import apptest.sql to apptest db use pgsql
 su - user_pgsql -c "export PGPASSWORD='pgsql'; /opt/pgsql/bin/pg_dump -h 127.0.0.1 -p 15432 -U pgsql --inserts -f /opt/apptest.sql apptest"
+
 #  create apptest
 ./createdb -h 127.0.0.1 -p 15432 -U pgsql apptest;
+#  delete apptest
+./dropdb -h 127.0.0.1 -p 15432 -U pgsql apptest
 
 # import public.sql to apptest use pgsql
 ./psql -h 127.0.0.1 -p 15432 -d apptest -U pgsql -f  public.sql
 
-# dump db apptest to apptest.sql
+# export dump db apptest to apptest.sql
 ./pg_dump -h 127.0.0.1 -p 15432 -U pgsql --inserts -f apptest.sql apptest
-#  delete apptest
-./dropdb -h 127.0.0.1 -p 15432 -U pgsql apptest
 
 # 进入 ./psql
-# list 素有的数据库
+./psql -h 127.0.0.1 -p 15432 -d apptest -U pgsql
+
+# list 所有的数据库
 \l    # list all database
 # 切换数据库
 \c dbName; # change db;
