@@ -21,6 +21,9 @@ awk '{print $1}' 以空格分隔 输出第一列 -F "/" 以/分隔
 
 awk '{num +=$1}END{print num}'  打印第一列的数字和
 
+# 大于500M的文件，按数值大小倒序
+find . -type f -size +500M  -print0 | xargs -0 du -h | sort -rh
+
 #crontab -e
 #将auto-del-30-days-ago-log.sh执行脚本加入到系统计划任务，到点自动执行  凌晨0点10分
 #10 0 * * * /opt/soft/log/auto-del-7-days-ago-log.sh >/dev/null 2>&1

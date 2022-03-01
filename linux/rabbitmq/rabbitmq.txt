@@ -62,6 +62,10 @@ curl -i -u user_rabbit:RabbitMQ_pwd@Lab -XGET http://127.0.0.1:15672/api/queues
 
 curl -i -u user_rabbit:RabbitMQ_pwd@Lab -XGET http://127.0.0.1:15672/api/exchanges/%2F/appLogsExchanges/bindings/source
 
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -XGET http://10.244.251.22:15672/api/queues/%2F/app_search_news_queue
+
+curl -i -u openlab_rabbit:RabbitMQ_2017@Lab -H "content-type:application/json" -XDELETE http://10.244.251.22:15672/api/queues/%2F/app_search_news_queue
+
 ---------------------------------------------------------------
 
 curl -i -u user_rabbit:RabbitMQ_pwd@Lab -H "content-type:application/json" -XDELETE http://127.0.0.1:15672/api/exchanges/%2F/appLogsExchanges

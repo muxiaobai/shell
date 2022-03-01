@@ -4,7 +4,11 @@
 # 测试
 curl -u elastic:123123 http://192.168.120.83:9200/_cat/health?v
 
-
+# 内存满了，ES自动限制
+https://www.xiaocaicai.com/2020/12/elasticsearch-index-blocks-read_only_allow_delete/
+curl -XPUT -H "Content-Type: application/json" \
+   http://localhost:9200/_all/_settings \
+     -d '{"index.blocks.read_only_allow_delete": false}'
 
 # 系统菜单
 curl -u 'elastic:elasticsearch_pwd@*))' -H 'Content-type:application/json' -XGET  http://127.0.0.1:19200/_cat?v
