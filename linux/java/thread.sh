@@ -1,7 +1,7 @@
 
 #!/bin/sh
 
-javapath=/opt/vsb/jdk
+javapath=/opt/jdk
 #javapid=`${javapath}/bin/jps -m -l`
 javapid=19054
 pwdpath=`pwd`
