@@ -1,8 +1,12 @@
 
 clickhouse-client
 
+clickhouse-client  -u username  --password 'password'
+
 show databases;
 
 use xxxx;
 
 show tables;
+
+ALTER  table databases.table update  field ='1' where id ='1594976941317070850';

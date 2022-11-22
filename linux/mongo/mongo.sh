@@ -12,7 +12,7 @@ db.createUser({user:"test_mongo",pwd:"MongoDB_pwd",roles:[{role:"readWrite",db:"
 #mongo 127.0.0.1:9430/admin -u root -p FpTH2a
 db.getCollection('test').find({});
 
-
+db.getCollection('624fcbda14aea5ee8b9d1569').find({'content_type':'text/html'}).count(true);
 
 # 备份生产数据：
 /db/mongodb-3.4.7/bin/mongodump -h 127.0.0.1:9430 -d daochufilename -o  /db/mongodb-3.4.7/data/mongo_bak/180414

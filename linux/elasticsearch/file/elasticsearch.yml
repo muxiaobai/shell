@@ -27,6 +27,19 @@ xpack.security.transport.ssl.verification_mode: certificate
 xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
 xpack.security.transport.ssl.truststore.path: elastic-certificates.p12
 
+threadpool:
+  index:
+    type: fixed
+    size: 30
+    queue: 1000
+    reject_policy: caller
+  bulk:
+    type: fixed
+    size: 60
+    queue: 1000
+  write:
+    size: 9
+    queue_size: 1000
 
 # ======================== Elasticsearch Configuration =========================
 #
